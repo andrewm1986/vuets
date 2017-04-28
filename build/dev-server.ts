@@ -30,64 +30,66 @@ let compiler = webpack(webpackConfig);
 let devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true
-})
+});
 
 let hotMiddleware = webpackHotvMiddleware(compiler, {
   log: () => {}
-})
+});
+
+
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
-    cb()
-  })
-})
+    hotMiddleware.publish({ action: 'reload' });
+    cb();
+  });
+});
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
-  let options = proxyTable[context]
+  let options = proxyTable[context];
   if (typeof options === 'string') {
-    options = { target: options }
+    options = { target: options };
   }
-  app.use(proxyMiddleware(options.filter || context, options))
+  app.use(proxyMiddleware(options.filter || context, options));
 })
 
 // handle fallback for HTML5 history API
-app.use(connectHistory())
+app.use(connectHistory());
 
 // serve webpack bundle output
-app.use(devMiddleware)
+app.use(devMiddleware);
 
 // enable hot-reload and state-preserving
 // compilation error display
-app.use(hotMiddleware)
+app.use(hotMiddleware);
 
 // serve pure static assets
-let staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
+let staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
+app.use(staticPath, express.static('./static'));
 
-let uri = 'http://localhost:' + port
+let uri = 'http://localhost:' + port;
 
-let _resolve
+let _resolve;
 let readyPromise = new Promise(resolve => {
-  _resolve = resolve
-})
+  _resolve = resolve;
+});
 
-console.log('> Starting dev server...')
+console.log('> Starting dev server...');
 devMiddleware.waitUntilValid(() => {
-  console.log('> Listening at ' + uri + '\n')
+  console.log('> Listening at ' + uri + '\n');
   // when env is testing, don't need open it
   if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-    opn(uri)
+    opn(uri);
   }
-  _resolve()
-})
+  _resolve();
+});
 
-let server = app.listen(port)
+let server = app.listen(port);
 
 export default {
   ready: readyPromise,
   close: () => {
-    server.close()
+    server.close();
   }
 };

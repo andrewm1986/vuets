@@ -3,15 +3,15 @@ versionCheck();
 
 process.env.NODE_ENV = 'production';
 
-import ora from 'ora';
+let ora = require('ora');
 import * as rm from 'rimraf';
 import * as path from 'path';
 import * as chalk from 'chalk';
 import * as webpack from 'webpack';
 import config from '../config';
-import * as webpackConfig from './webpack.prod.conf';
+import webpackConfig from './webpack.prod.conf';
 
-let spinner = ora('building for production...');
+var spinner = ora('building for production...');
 spinner.start();
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {

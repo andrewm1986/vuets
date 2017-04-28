@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import Vuex from 'vuex';
+import * as Vuex from 'vuex';
 
 import * as types from '@/store/products/messages';
 

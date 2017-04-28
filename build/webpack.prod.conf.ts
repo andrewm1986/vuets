@@ -13,7 +13,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 let env = config.build.env;
 
-let webpackConfig = merge(baseWebpackConfig, {
+let webpackConfig = merge(baseWebpackConfig as any, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,

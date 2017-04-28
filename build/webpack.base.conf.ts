@@ -3,7 +3,7 @@ import * as utils from './utils';
 import config from '../config';
 import vueLoaderConfig from './vue-loader.conf';
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
 
@@ -27,6 +27,12 @@ export default {
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: { typeCheck: true, emitErrors: true, }
+      },
       {
         test: /\.ts$/,
         loader: 'ts-loader',
