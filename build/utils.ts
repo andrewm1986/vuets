@@ -1,18 +1,18 @@
-var path = require('path')
-var config = require('../config')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+import * as path from 'path';
+import config from '../config';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-exports.assetsPath = function (_path) {
-  var assetsSubDirectory = process.env.NODE_ENV === 'production'
+export function assetsPath(_path) {
+  let assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
   return path.posix.join(assetsSubDirectory, _path)
 }
 
-exports.cssLoaders = function (options = undefined) {
+export function cssLoaders(options = undefined) {
   options = options || {}
 
-  var cssLoader = {
+  let cssLoader = {
     loader: 'css-loader',
     options: {
       minimize: process.env.NODE_ENV === 'production',
@@ -22,7 +22,7 @@ exports.cssLoaders = function (options = undefined) {
 
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader = undefined, loaderOptions = undefined) {
-    var loaders = [cssLoader]
+    let loaders = [cssLoader]
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -40,7 +40,7 @@ exports.cssLoaders = function (options = undefined) {
         fallback: 'vue-style-loader'
       })
     } else {
-      return (<any[]>['vue-style-loader']).concat(loaders)
+      return (['vue-style-loader'] as any[]).concat(loaders)
     }
   }
 
@@ -57,11 +57,11 @@ exports.cssLoaders = function (options = undefined) {
 }
 
 // Generate loaders for standalone style files (outside of .vue)
-exports.styleLoaders = function (options) {
-  var output = []
-  var loaders = exports.cssLoaders(options)
-  for (var extension in loaders) {
-    var loader = loaders[extension]
+export function styleLoaders(options) {
+  let output = []
+  let loaders = exports.cssLoaders(options)
+  for (let extension in loaders) {
+    let loader = loaders[extension]
     output.push({
       test: new RegExp('\\.' + extension + '$'),
       use: loader

@@ -1,17 +1,19 @@
-var path = require('path')
-var utils = require('./utils')
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+import * as path from 'path';
+import * as utils from './utils';
+import * as webpack from 'webpack';
+import config from '../config';
+import * as merge from 'webpack-merge';
+import baseWebpackConfig from './webpack.base.conf';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as OptimizeCSSPlugin from 'optimize-css-assets-webpack-plugin';
+import * as CompressionWebpackPlugin from 'compression-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-var env = config.build.env
+let env = config.build.env;
 
-var webpackConfig = merge(baseWebpackConfig, {
+let webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -92,10 +94,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     ])
   ]
-})
+});
 
 if (config.build.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
@@ -109,12 +110,11 @@ if (config.build.productionGzip) {
       threshold: 10240,
       minRatio: 0.8
     })
-  )
+  );
 }
 
 if (config.build.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = webpackConfig
+export default webpackConfig;

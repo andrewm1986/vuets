@@ -1,13 +1,13 @@
-var path = require('path')
-var utils = require('./utils')
-var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
+import * as path from 'path';
+import * as utils from './utils';
+import config from '../config';
+import vueLoaderConfig from './vue-loader.conf';
 
 function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, '..', dir);
 }
 
-module.exports = {
+export default {
   entry: {
     app: './src/main.ts'
   },
@@ -32,7 +32,7 @@ module.exports = {
         loader: 'ts-loader',
         include: [resolve('src'), resolve('test')],
         exclude: /node_modules/,
-        options: { 
+        options: {
           appendTsSuffixTo: [/\.vue$/]
         }
       },
@@ -64,4 +64,4 @@ module.exports = {
       }
     ]
   }
-}
+};

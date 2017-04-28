@@ -1,8 +1,8 @@
-var utils = require('./utils')
-var config = require('../config')
-var isProduction = process.env.NODE_ENV === 'production'
+import * as utils from './utils';
+import config from '../config';
+let isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
+export default {
   loaders: Object.assign(
     { ts: 'vue-ts-loader' },
     utils.cssLoaders({
@@ -13,4 +13,4 @@ module.exports = {
     })
   ),
   esModule: true,
-}
+};
