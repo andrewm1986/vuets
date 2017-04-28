@@ -18,20 +18,33 @@
         </tr>
       </tbody>
     </table>
-    <router-link :to="{ name: 'New Product' }">Add Product</router-link> 
+    <router-link :to="{ name: 'New Product' }">Add Product</router-link>
   </div>
 </template>
 
 <script lang="ts">
 
-import * as Vuex from 'vuex';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Component from 'vue-class-component';
 
-import * as types from '@/store/products/messages';
+import * as types from '../../store/products/messages';
+import { State } from '../../store/products';
 
-export default {
-  computed: Vuex.mapGetters({
-    products: types.GET_PRODUCTS
-  })
+@Component(
+  {
+    computed: {
+      ...Vuex.mapGetters({
+        products: types.GET_PRODUCTS
+      })
+    }
+  }
+)
+export default class List extends Vue {
+  get products2() {
+    
+    return (this.$store as Vuex.Store<State>).state;
+  }
 };
 
 </script>

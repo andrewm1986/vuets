@@ -5,15 +5,22 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Component from 'vue-class-component';
 
-import * as Vuex from 'vuex';
+import * as types from '../../store/products/messages';
 
-import * as types from '@/store/products/messages';
-
-export default {
-  computed: Vuex.mapGetters({
-    products: types.GET_PRODUCTS
-  })  
+@Component(
+  {
+    computed: {
+      ...Vuex.mapGetters({
+        products: types.GET_PRODUCTS
+      })
+    }
+  }
+)
+export default class Add extends Vue {
 };
 
 </script>

@@ -3,15 +3,15 @@ declare let process: any;
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import products from './products';
+import { store, State } from './products';
 
 Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production';
 
-export default new Vuex.Store({
+export default new Vuex.Store<State>({
   modules: {
-    products
+    store
   },
   strict: debug
 });

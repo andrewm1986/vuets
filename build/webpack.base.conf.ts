@@ -31,7 +31,10 @@ export default {
         test: /\.ts$/,
         enforce: 'pre',
         loader: 'tslint-loader',
-        options: { typeCheck: true, emitErrors: true, }
+        options: {
+          typeCheck: true,
+          emitErrors: true,
+        }
       },
       {
         test: /\.ts$/,

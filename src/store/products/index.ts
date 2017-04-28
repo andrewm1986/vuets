@@ -1,6 +1,18 @@
+import Vuex from 'vuex';
 import { getters } from './getters'
 
-const initialState = {
+export class Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+}
+
+export class State {
+  products: Product[]
+}
+
+const initialState: State = {
   products: [
     {
       id: '001',
@@ -19,13 +31,13 @@ const initialState = {
       name: 'Remmington X mechanical keyboard',
       description: 'Excellent for gaming and typing',
       price: 595,
-    }
+    },
   ]
 }
 
-export default {
+export const store: Vuex.StoreOptions<State> = {
   state: {
     ...initialState
   },
-  getters
+  getters,
 }
