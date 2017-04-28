@@ -6,7 +6,9 @@ if (!process.env.NODE_ENV) {
 }
 
 var opn = require('opn')
-var path = require('path')
+
+import * as path from 'path';
+
 var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
